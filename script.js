@@ -40,10 +40,23 @@ const img = document.getElementById('images');
 const text = document.getElementById('quotes');
 const nameTag = document.getElementById('names');
 let i = 0;
+let timer;
 
 updateWiseWords();
 
+document.addEventListener(`keydown`,(event) => {
+    if(event.key === "ArrowRight"){
+        i = (i + 1) % testimonials.length;
+        updateWiseWords();
+    }
+    else if (event.key === "ArrowLeft") {
+        i = (i - 1 + testimonials.length) % testimonials.length;
+        updateWiseWords();
+    }
+});
+
 function updateWiseWords(){
+    clearTimeout(timer);
 
     img.classList.remove(`show`)
     text.classList.remove(`show`)
@@ -61,6 +74,6 @@ function updateWiseWords(){
 
     i = (i + 1) % testimonials.length;
 
-    setTimeout(updateWiseWords, 10000);
+    timer = setTimeout(updateWiseWords, 10000);
 }, 1000);
 }
